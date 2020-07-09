@@ -2,7 +2,9 @@
 
 A simple Tic Tac Toe game written in Qt for fun.
 
-<div style="text-align:center"><img src="images/v1.gif" /></div>
+<p align="center">
+  <img src="images/v1.gif">
+</p>
 
 ## Development and testing enveriment
 
