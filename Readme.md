@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Mavrikant/TicTacToe.svg?branch=master)](https://travis-ci.org/Mavrikant/TicTacToe)
+
 # Tic Tac Toe
 
 A simple Tic Tac Toe game written in Qt for fun.
