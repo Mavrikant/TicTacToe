@@ -1,3 +1,4 @@
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d091e093da134620982d193335c02063)](https://app.codacy.com/manual/Mavrikant/TicTacToe?utm_source=github.com&utm_medium=referral&utm_content=Mavrikant/TicTacToe&utm_campaign=Badge_Grade_Dashboard)
 [![Build Status](https://travis-ci.org/Mavrikant/TicTacToe.svg?branch=master)](https://travis-ci.org/Mavrikant/TicTacToe)
 
 # Tic Tac Toe
