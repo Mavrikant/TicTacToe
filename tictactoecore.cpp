@@ -77,7 +77,7 @@ void TicTacToeCore::changeGameDifficulty(int gameDifficulty)
 
 void TicTacToeCore::computerPlayRandom()
 {
-    usleep(500000);
+    usleep(0.5 * 1000000);//wait for it
     while (1)
     {
         int i = rand() % 3;
@@ -92,7 +92,7 @@ void TicTacToeCore::computerPlayRandom()
 
 void TicTacToeCore::computerPlaySmart()
 {
-    sleep(200000);
+    usleep(0.2 * 1000000);//wait for it
     //TODO prevent win
     computerPlayRandom();
 }

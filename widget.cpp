@@ -23,7 +23,6 @@ Widget::Widget(QWidget *parent): QWidget(parent), ui(new Ui::Widget)
     {
         connect(pushButtons[i], SIGNAL (clicked()), this, SLOT (userPlayed()));
     }
-    //this->setStyleSheet("QPushButton:disabled {}");
 }
 
 Widget::~Widget()
@@ -50,12 +49,10 @@ void Widget::updateGUI()
                 button->setDisabled(true);
                 button->setStyleSheet("background-color: rgb(252, 175, 62);color: blue;");
                 break;
-
             case ' ':
                 button->setEnabled(true);
                 button->setStyleSheet("background-color: rgb(252, 175, 62);");
                 break;
-
             }
 
         }
@@ -72,7 +69,7 @@ void Widget::gameFinishedPlayerWon()
     ui->labelScorePlayer->setNum(m_score.player);
     ui->labelScorePlayer->setStyleSheet("color: red;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1500000);
+    usleep(1 * 1000000);//wait for it
     TTT.clearBoard();
     updateGUI();
     //todo add animation
@@ -85,7 +82,7 @@ void Widget::gameFinishedTieWon()
     ui->labelScoreTie->setNum(m_score.tie);
     ui->labelScoreTie->setStyleSheet("color: orange;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1500000);
+    usleep(1 * 1000000);//wait for it
     TTT.clearBoard();
     updateGUI();
     //todo add animation
@@ -98,7 +95,7 @@ void Widget::gameFinishedComputerWon()
     ui->labelScoreComputer->setNum(m_score.computer);
     ui->labelScoreComputer->setStyleSheet("color: blue;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1500000);
+    usleep(1 * 1000000);//wait for it
     TTT.clearBoard();
     updateGUI();
     //todo add animation
@@ -119,7 +116,6 @@ void Widget::userPlayed() //TODO too long
     case gameState::FINISHED:
         gameFinishedPlayerWon();
         break;
-
     case gameState::TIE:
         gameFinishedTieWon();
         break;
@@ -134,7 +130,6 @@ void Widget::userPlayed() //TODO too long
     case gameState::FINISHED:
         gameFinishedComputerWon();
         break;
-
     case gameState::TIE:
         gameFinishedTieWon();
         break;
