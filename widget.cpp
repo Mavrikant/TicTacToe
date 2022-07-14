@@ -56,6 +56,11 @@ void Widget::updateGUI()
     ui->labelScorePlayer->setStyleSheet("color: red;");
     ui->labelScoreTie->setStyleSheet("color: orange;");
     ui->labelScoreComputer->setStyleSheet("color: blue;");
+
+    ui->labelScorePlayer->setNum(m_score.player);
+    ui->labelScoreTie->setNum(m_score.tie);
+    ui->labelScoreComputer->setNum(m_score.computer);
+
     this->repaint();
 }
 

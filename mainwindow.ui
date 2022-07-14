@@ -43,6 +43,13 @@
     <addaction name="actionMedium"/>
     <addaction name="actionHard"/>
    </widget>
+   <widget class="QMenu" name="menuGame">
+    <property name="title">
+     <string>Game</string>
+    </property>
+    <addaction name="actionReset"/>
+   </widget>
+   <addaction name="menuGame"/>
    <addaction name="menuDifficulty"/>
    <addaction name="menuAbout"/>
   </widget>
@@ -488,6 +495,11 @@
    </property>
    <property name="text">
     <string>Hard</string>
+   </property>
+  </action>
+  <action name="actionReset">
+   <property name="text">
+    <string>Reset</string>
    </property>
   </action>
  </widget>

@@ -20,6 +20,12 @@ class Widget : public QWidget
     Widget(QWidget *parent = nullptr);
     ~Widget();
     TicTacToeCore TTT;
+    void resetScore()
+    {
+        m_score = {0, 0, 0};
+        TTT.clearBoard();
+        updateGUI();
+    }
 
   private:
     struct score

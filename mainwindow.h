@@ -18,10 +18,10 @@ class MainWindow : public QMainWindow
 
   private slots:
     void on_actionEasy_triggered();
-
     void on_actionMedium_triggered();
-
     void on_actionHard_triggered();
+
+    void on_actionReset_triggered();
 
   private:
     Ui::MainWindow *ui;
