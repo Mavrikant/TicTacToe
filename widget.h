@@ -6,34 +6,37 @@
 #include <QWidget>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
+namespace Ui
+{
 class Widget;
 }
 QT_END_NAMESPACE
 
-class Widget : public QWidget {
-  Q_OBJECT
+class Widget : public QWidget
+{
+    Q_OBJECT
 
-public:
-  Widget(QWidget *parent = nullptr);
-  ~Widget();
-  TicTacToeCore TTT;
+  public:
+    Widget(QWidget *parent = nullptr);
+    ~Widget();
+    TicTacToeCore TTT;
 
-private:
-  struct score {
-    int player = 0;
-    int tie = 0;
-    int computer = 0;
-  } m_score;
-  Ui::Widget *ui;
+  private:
+    struct score
+    {
+        int player = 0;
+        int tie = 0;
+        int computer = 0;
+    } m_score;
+    Ui::Widget *ui;
 
-  QPushButton *pushButtons[9];
-  void updateGUI();
-  void gameFinishedPlayerWon();
-  void gameFinishedTieWon();
-  void gameFinishedComputerWon();
+    QPushButton *pushButtons[9];
+    void updateGUI();
+    void gameFinishedPlayerWon();
+    void gameFinishedTieWon();
+    void gameFinishedComputerWon();
 
-private slots:
-  void userPlayed();
+  private slots:
+    void userPlayed();
 };
 #endif // WIDGET_H
