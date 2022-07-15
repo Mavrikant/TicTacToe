@@ -3,7 +3,8 @@
 
 #include <QWidget>
 
-namespace Ui {
+namespace Ui
+{
 class BuildInfo;
 }
 
@@ -11,8 +12,8 @@ class BuildInfo : public QWidget
 {
     Q_OBJECT
 
-        public:
-                 explicit BuildInfo(QWidget *parent = nullptr);
+  public:
+    explicit BuildInfo(QWidget *parent = nullptr);
     ~BuildInfo();
 
   private:
