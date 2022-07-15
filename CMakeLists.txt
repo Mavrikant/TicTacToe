@@ -16,7 +16,18 @@ configure_file (
   "${PROJECT_BINARY_DIR}/config.h"
   )
 
+string(TIMESTAMP BUILD_DATE "%Y-%m-%dT%H:%M:%SZ")
 include_directories(${PROJECT_BINARY_BIN})
+
+set(PRE_CONFIGURE_FILE "${PROJECT_SOURCE_DIR}/git.cpp.in")
+set(POST_CONFIGURE_FILE "${PROJECT_BINARY_DIR}/git.cpp")
+
+include(git_watcher.cmake)
+
+add_library(git STATIC ${POST_CONFIGURE_FILE})
+target_include_directories(git PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+add_dependencies(git check_git)
+
 
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
@@ -31,6 +42,11 @@ set(PROJECT_SOURCES
         mainwindow.ui
         mainwindow.cpp
         mainwindow.h
+        buildinfo.ui
+        buildinfo.cpp
+        buildinfo.h
+        git.h
+
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -56,7 +72,7 @@ else()
     endif()
 endif()
 
-target_link_libraries(TicTacToe PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(TicTacToe PRIVATE Qt${QT_VERSION_MAJOR}::Widgets git)
 
 set_target_properties(TicTacToe PROPERTIES
     MACOSX_BUNDLE_GUI_IDENTIFIER my.example.com
@@ -65,7 +81,10 @@ set_target_properties(TicTacToe PROPERTIES
     MACOSX_BUNDLE TRUE
     WIN32_EXECUTABLE TRUE
 )
+target_compile_definitions(TicTacToe PRIVATE "BUILD_DATE=\"${BUILD_DATE}\"")
 
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(TicTacToe)
 endif()
+
+

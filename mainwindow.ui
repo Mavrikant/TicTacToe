@@ -34,6 +34,7 @@
     <property name="title">
      <string>About</string>
     </property>
+    <addaction name="actionBuild_Info"/>
    </widget>
    <widget class="QMenu" name="menuDifficulty">
     <property name="title">
@@ -500,6 +501,11 @@
   <action name="actionReset">
    <property name="text">
     <string>Reset</string>
+   </property>
+  </action>
+  <action name="actionBuild_Info">
+   <property name="text">
+    <string>Build Info</string>
    </property>
   </action>
  </widget>

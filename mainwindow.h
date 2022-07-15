@@ -23,6 +23,8 @@ class MainWindow : public QMainWindow
 
     void on_actionReset_triggered();
 
+    void on_actionBuild_Info_triggered();
+
   private:
     Ui::MainWindow *ui;
 };
