@@ -22,7 +22,7 @@ class Widget : public QWidget
     TicTacToeCore TTT;
     void resetScore()
     {
-        m_score = {0, 0, 0};
+        m_score = {0};
         TTT.clearBoard();
         updateGUI();
     }
@@ -36,7 +36,7 @@ class Widget : public QWidget
     } m_score;
     Ui::Widget *ui;
 
-    QPushButton *pushButtons[9];
+    QPushButton *pushButtons[7 * 7];
     void updateGUI();
     void gameFinishedPlayerWon();
     void gameFinishedTieWon();

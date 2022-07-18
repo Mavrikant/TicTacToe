@@ -14,10 +14,10 @@ class TicTacToeCore
     TicTacToeCore();
     void computerPlay();
     gameState gameStatus();
-    gameState gameStatus(char (&board)[3][3]);
+    gameState gameStatus(char (&board)[7][7]);
     void clearBoard();
     void changeGameDifficulty(int gameDifficulty);
-    char m_board[3][3] = {{' ', ' ', ' '}, {' ', ' ', ' '}, {' ', ' ', ' '}};
+    char m_board[7][7] = {0};
     friend QDebug operator<<(QDebug stream, const TicTacToeCore &TTT);
 
   private:

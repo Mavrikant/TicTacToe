@@ -24,33 +24,49 @@ void TicTacToeCore::computerPlay()
 
 gameState TicTacToeCore::gameStatus() { return gameStatus(m_board); }
 
-gameState TicTacToeCore::gameStatus(char (&board)[3][3])
+gameState TicTacToeCore::gameStatus(char (&board)[7][7])
 {
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
-        if ((board[i][0] != ' ') && (board[i][0] == board[i][1]) && (board[i][1] == board[i][2])) // check rows
+        for (int j = 0; j < 4; ++j)
         {
-            return gameState::FINISHED;
+            if ((board[i][0 + j] != ' ') && (board[i][0 + j] == board[i][1 + j]) && (board[i][1 + j] == board[i][2 + j]) && (board[i][2 + j] == board[i][3 + j])) // check rows
+            {
+                return gameState::FINISHED;
+            }
+
+            if ((board[0 + j][i] != ' ') && (board[0 + j][i] == board[1 + j][i]) && (board[1 + j][i] == board[2 + j][i]) && (board[2 + j][i] == board[3 + j][i])) // check colomn
+            {
+                return gameState::FINISHED;
+            }
         }
-        if ((board[0][i] != ' ') && (board[0][i] == board[1][i]) && (board[1][i] == board[2][i])) // check colomn
+    }
+
+    for (int i = 0; i < 4; ++i)
+    {
+        for (int j = 0; j < 4; ++j)
         {
-            return gameState::FINISHED;
+            if ((board[i + 0][j + 0] != ' ') && (board[i + 0][j + 0] == board[i + 1][j + 1]) && (board[i + 1][j + 1] == board[i + 2][j + 2]) && (board[i + 2][j + 2] == board[i + 3][j + 3])) // check diagonal
+            {
+                return gameState::FINISHED;
+            }
         }
     }
 
-    if ((board[0][0] != ' ') && (board[0][0] == board[1][1]) && (board[1][1] == board[2][2])) // check diagonal
+    for (int i = 0; i < 4; ++i)
     {
-        return gameState::FINISHED;
+        for (int j = 0; j < 4; ++j)
+        {
+            if ((board[i + 0][j + 3] != ' ') && (board[i + 0][j + 3] == board[i + 1][j + 2]) && (board[i + 1][j + 2] == board[i + 2][j + 1]) && (board[i + 2][j + 1] == board[i + 3][j + 0])) // check diagonal
+            {
+                return gameState::FINISHED;
+            }
+        }
     }
 
-    if ((board[0][2] != ' ') && (board[0][2] == board[1][1]) && (board[1][1] == board[2][0])) // check diagonal
+    for (int i = 0; i < 7; ++i)
     {
-        return gameState::FINISHED;
-    }
-
-    for (int i = 0; i < 3; ++i)
-    {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < 7; ++j)
         {
             if (board[i][j] == ' ')
             {
@@ -63,9 +79,9 @@ gameState TicTacToeCore::gameStatus(char (&board)[3][3])
 
 void TicTacToeCore::clearBoard()
 {
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < 7; ++j)
         {
             m_board[i][j] = ' ';
         }
@@ -78,8 +94,8 @@ void TicTacToeCore::computerPlayEasy()
 {
     while (1)
     {
-        int i = rand() % 3;
-        int j = rand() % 3;
+        int i = rand() % 7;
+        int j = rand() % 7;
         if (m_board[i][j] == ' ')
         {
             m_board[i][j] = 'O';
@@ -93,16 +109,16 @@ void TicTacToeCore::computerPlayMedium()
     int value = -99;
     int a = 0;
     int b = 0;
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < 7; ++j)
         {
             if (m_board[i][j] == ' ')
             {
                 m_board[i][j] = 'O';
-                if (value < minimax(false, 1))
+                if (value < minimax(false, 3))
                 {
-                    value = minimax(false, 1);
+                    value = minimax(false, 3);
                     a = i;
                     b = j;
                 }
@@ -118,9 +134,9 @@ void TicTacToeCore::computerPlayHard()
     int value = -99;
     int a = 0;
     int b = 0;
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
-        for (int j = 0; j < 3; ++j)
+        for (int j = 0; j < 7; ++j)
         {
             if (m_board[i][j] == ' ')
             {
@@ -154,9 +170,9 @@ int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
     if (maximizingPlayer) // Computer
     {
         int value = -99;
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 7; ++i)
         {
-            for (int j = 0; j < 3; ++j)
+            for (int j = 0; j < 7; ++j)
             {
                 if (m_board[i][j] == ' ')
                 {
@@ -171,9 +187,9 @@ int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
     else // Human
     {
         int value = +99;
-        for (int i = 0; i < 3; ++i)
+        for (int i = 0; i < 7; ++i)
         {
-            for (int j = 0; j < 3; ++j)
+            for (int j = 0; j < 7; ++j)
             {
                 if (m_board[i][j] == ' ')
                 {
@@ -190,9 +206,9 @@ int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
 QDebug operator<<(QDebug stream, const TicTacToeCore &TTT)
 {
     QDebugStateSaver saver(stream);
-    for (int i = 0; i < 3; ++i)
+    for (int i = 0; i < 7; ++i)
     {
-        stream.nospace() << TTT.m_board[i][0] << "|" << TTT.m_board[i][1] << "|" << TTT.m_board[i][2] << "\n";
+        stream.nospace() << TTT.m_board[i][0] << "|" << TTT.m_board[i][1] << "|" << TTT.m_board[i][2] << "|" << TTT.m_board[i][3] << "|" << TTT.m_board[i][4] << "|" << TTT.m_board[i][5] << "|" << TTT.m_board[i][6] << "\n";
     }
     return stream;
 }
