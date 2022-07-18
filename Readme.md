@@ -13,6 +13,9 @@ A simple Tic Tac Toe game written in Qt for fun.
 
 ## TODO
 
+* Update gif on Readme
+* Add 5x5 and 7x7 boards
+  * Improve minimax algorithm with alpha beta pruning
 * ~~Game difficulty option~~
   * ~~Implement minimax algorithm~~
 * Add Sound effects
@@ -22,12 +25,13 @@ A simple Tic Tac Toe game written in Qt for fun.
   * After clicked
   * After game finished
 * Toolbar
-  * Reset score
+  * ~~Reset score~~
   * Mute sound
 * Menubar
   * About section
   * ~~Settings section~~
 * Add unit tests
+* Add automated GUI testing with Squish
 * ~~Add code coverage report~~
 * ~~Add automatic build~~
 
