@@ -17,14 +17,14 @@ class TicTacToeCore
     gameState gameStatus(char (&board)[7][7]);
     void clearBoard();
     void changeGameDifficulty(int gameDifficulty);
-    char m_board[7][7] = {0};
+    char m_board[7][7];
     friend QDebug operator<<(QDebug stream, const TicTacToeCore &TTT);
 
   private:
     void computerPlayEasy();
     void computerPlayMedium();
     void computerPlayHard();
-    int minimax(bool maximizingPlayer, int dept);
+    float minimax(bool maximizingPlayer, int dept, float alpha, float beta);
     int m_gameDifficulty = 0;
 };
 #endif // TICTACTOECORE_H

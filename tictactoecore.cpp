@@ -3,7 +3,7 @@
 #include <QDebug>
 #include <algorithm>
 
-TicTacToeCore::TicTacToeCore() {}
+TicTacToeCore::TicTacToeCore() { clearBoard(); }
 
 void TicTacToeCore::computerPlay()
 {
@@ -109,6 +109,8 @@ void TicTacToeCore::computerPlayMedium()
     int value = -99;
     int a = 0;
     int b = 0;
+    float alpha = -INFINITY;
+    float beta = +INFINITY;
     for (int i = 0; i < 7; ++i)
     {
         for (int j = 0; j < 7; ++j)
@@ -116,9 +118,10 @@ void TicTacToeCore::computerPlayMedium()
             if (m_board[i][j] == ' ')
             {
                 m_board[i][j] = 'O';
-                if (value < minimax(false, 3))
+                int res;
+                if (res = minimax(false, 4, alpha, beta), value < res)
                 {
-                    value = minimax(false, 3);
+                    value = res;
                     a = i;
                     b = j;
                 }
@@ -131,9 +134,11 @@ void TicTacToeCore::computerPlayMedium()
 
 void TicTacToeCore::computerPlayHard()
 {
-    int value = -99;
+    float value = -INFINITY;
     int a = 0;
     int b = 0;
+    float alpha = -INFINITY;
+    float beta = +INFINITY;
     for (int i = 0; i < 7; ++i)
     {
         for (int j = 0; j < 7; ++j)
@@ -141,9 +146,10 @@ void TicTacToeCore::computerPlayHard()
             if (m_board[i][j] == ' ')
             {
                 m_board[i][j] = 'O';
-                if (value < minimax(false, 99))
+                float res;
+                if (res = minimax(false, 10, alpha, beta), value < res)
                 {
-                    value = minimax(false, 99);
+                    value = res;
                     a = i;
                     b = j;
                 }
@@ -154,22 +160,26 @@ void TicTacToeCore::computerPlayHard()
     m_board[a][b] = 'O';
 }
 
-int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
+float TicTacToeCore::minimax(bool maximizingPlayer, int dept, float alpha, float beta)
 {
     gameState gameresult = gameStatus(m_board);
 
     if (gameresult == gameState::FINISHED)
     {
-        return (maximizingPlayer) ? -1 : +1;
+        return (maximizingPlayer ? -80 : +80) - dept;
     }
-    else if (gameresult == gameState::TIE || dept == 0)
+    else if (gameresult == gameState::TIE)
     {
-        return 0;
+        return (maximizingPlayer ? -30 : +30) - dept;
+    }
+    else if (dept == 0)
+    {
+        return (maximizingPlayer ? -10 : +10) - dept;
     }
 
     if (maximizingPlayer) // Computer
     {
-        int value = -99;
+        float value = -99;
         for (int i = 0; i < 7; ++i)
         {
             for (int j = 0; j < 7; ++j)
@@ -177,16 +187,25 @@ int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
                 if (m_board[i][j] == ' ')
                 {
                     m_board[i][j] = 'O';
-                    value = std::max(value, minimax(false, dept - 1));
+                    value = std::max(value, minimax(false, dept - 1, alpha, beta));
                     m_board[i][j] = ' ';
+                    if (value > alpha)
+                    {
+                        alpha = value;
+                    }
+                    if (alpha >= beta)
+                    {
+                        i = 99;
+                        j = 99;
+                    };
                 }
             }
         }
-        return value;
+        return alpha;
     }
     else // Human
     {
-        int value = +99;
+        float value = +99;
         for (int i = 0; i < 7; ++i)
         {
             for (int j = 0; j < 7; ++j)
@@ -194,12 +213,21 @@ int TicTacToeCore::minimax(bool maximizingPlayer, int dept)
                 if (m_board[i][j] == ' ')
                 {
                     m_board[i][j] = 'X';
-                    value = std::min(value, minimax(true, dept - 1));
+                    value = std::min(value, minimax(true, dept - 1, alpha, beta));
                     m_board[i][j] = ' ';
+                    if (value < beta)
+                    {
+                        beta = value;
+                    }
+                    if (alpha >= beta)
+                    {
+                        i = 99;
+                        j = 99;
+                    }
                 }
             }
         }
-        return value;
+        return beta;
     }
 }
 
