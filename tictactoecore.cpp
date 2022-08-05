@@ -1,8 +1,8 @@
 #include "tictactoecore.h"
-#include <chrono>
-#include <thread>
 #include <QDebug>
 #include <algorithm>
+#include <chrono>
+#include <thread>
 
 TicTacToeCore::TicTacToeCore() { clearBoard(); }
 
