@@ -1,5 +1,6 @@
 #include "tictactoecore.h"
-#include "unistd.h"
+#include <chrono>
+#include <thread>
 #include <QDebug>
 #include <algorithm>
 
@@ -7,7 +8,7 @@ TicTacToeCore::TicTacToeCore() { clearBoard(); }
 
 void TicTacToeCore::computerPlay()
 {
-    usleep((3 - m_gameDifficulty) / 3 * 1000000); // wait for it
+    std::this_thread::sleep_for(std::chrono::microseconds((3 - m_gameDifficulty) / 3 * 1000000));
     switch (m_gameDifficulty)
     {
     case 0:

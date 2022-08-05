@@ -1,8 +1,11 @@
 #include "widget.h"
 #include "tictactoecore.h"
 #include "ui_widget.h"
-#include "unistd.h"
 #include <QDebug>
+#include <chrono>
+#include <thread>
+
+using namespace std::literals;
 
 Widget::Widget(QWidget *parent) : QWidget(parent), ui(new Ui::Widget)
 {
@@ -109,7 +112,7 @@ void Widget::gameFinishedPlayerWon()
     ui->labelScorePlayer->setNum(m_score.player);
     ui->labelScorePlayer->setStyleSheet("color: red;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1 * 1000000); // wait for it
+    std::this_thread::sleep_for(1000ms);
     TTT.clearBoard();
     updateGUI();
     // todo add animation
@@ -122,7 +125,7 @@ void Widget::gameFinishedTieWon()
     ui->labelScoreTie->setNum(m_score.tie);
     ui->labelScoreTie->setStyleSheet("color: orange;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1 * 1000000); // wait for it
+    std::this_thread::sleep_for(1000ms);
     TTT.clearBoard();
     updateGUI();
     // todo add animation
@@ -135,7 +138,7 @@ void Widget::gameFinishedComputerWon()
     ui->labelScoreComputer->setNum(m_score.computer);
     ui->labelScoreComputer->setStyleSheet("color: blue;font-weight:bold;font-size:30px;");
     this->repaint();
-    usleep(1 * 1000000); // wait for it
+    std::this_thread::sleep_for(1000ms);
     TTT.clearBoard();
     updateGUI();
     // todo add animation
